@@ -18,4 +18,5 @@ struct Meme {
     func getTextString(topTxt: String, botTxt: String) -> String{
         return " \(topTxt)  \(botTxt)"
     }
+    
 }
