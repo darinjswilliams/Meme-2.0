@@ -21,19 +21,26 @@ class SentMemesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
       }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+         tableView!.reloadData()
+    }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return memes.count
+        return self.memes.count
     }
+
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentMemeTableViewCell", for: indexPath) as! SentMemeTableViewCell
-
+        
+    
         // Configure the cell...
         let cstmMemeCell = self.memes[(indexPath as NSIndexPath).row]
         
@@ -48,6 +55,11 @@ class SentMemesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
         //Mark- Grab Detail veiw from Story board
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SentMemesDetailView") as! SentMemesDetailViewController
+        
+        detailController.memesData = self.memes[(indexPath as NSIndexPath).row]
+        
+        navigationController!.pushViewController(detailController, animated: true)
         
     }
 

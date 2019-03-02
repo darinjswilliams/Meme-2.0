@@ -19,6 +19,9 @@ class SentMemesCollectionViewController: UICollectionViewController {
     }
     
     
+    //MARK - Control Size of meme space usng flowlayout
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -29,14 +32,22 @@ class SentMemesCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let space:CGFloat = 3.0
+        let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
+        let heightDimension = (view.frame.size.height - (2 * space)) / 3.0
+        
+        
+        flowLayout.minimumLineSpacing = space
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
     }
 
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        print("SentMemesCollectionViewCell: numberOfItemsInSection \(memes.count)")
-        return memes.count
+        NSLog("SentMemesCollectionViewCell: numberOfItemsInSection \(memes.count)")
+        return self.memes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
